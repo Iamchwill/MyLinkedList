@@ -53,7 +53,7 @@ public class MyLinkedList{
     for(int i = 0; i < index; i++){
       value = value.getNext();
     }
-    return value.getData();
+    return value.getValue();
   }
 
   public String set(int index, String value){
@@ -62,8 +62,8 @@ public class MyLinkedList{
     for(int i = 0; i < index; i++){
       search = search.getNext();
     }
-    String out = search.getData();
-    search.setData(value);
+    String out = search.getValue();
+    search.setValue(value);
     return out;
   }
 
@@ -72,7 +72,7 @@ public class MyLinkedList{
     String out = "";
     out += "[";
     while(current != null){
-      out += current.getData();
+      out += current.getValue();
       if(current.getNext() != null) out += ", ";
       current = current.getNext();
     }

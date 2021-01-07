@@ -6,11 +6,11 @@ public class Node{
    prev = null;
    next = null;
  }
- public String getData(){
+ public String getValue(){
    return data;
  }
 
- public void setData(String value){
+ public void setValue(String value){
    data = value;
  }
 
