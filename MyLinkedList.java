@@ -1,4 +1,3 @@
-
 public class MyLinkedList{
  private int size;
  private Node start,end;
@@ -48,7 +47,15 @@ public class MyLinkedList{
    }
    size++;
  }
- 
+ public String get(int index){
+   if(index >= size) throw new IndexOutOfBoundsException();
+   Node value = start;
+   for(int i = 0; i < index; i++){
+     value = value.getNext();
+   }
+   return value.getData();
+ }
+
  public String toString(){
    Node current = start;
    String out = "";
