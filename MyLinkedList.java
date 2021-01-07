@@ -1,3 +1,4 @@
+
 public class MyLinkedList{
  private int size;
  private Node start,end;
@@ -24,6 +25,28 @@ public class MyLinkedList{
   }
   size++;
   return true;
+ }
+
+ public void add(int index, String value){
+   if(index > size) throw new IndexOutOfBoundsException();
+   if(index == size) this.add(value);
+   else if(index == 0){
+     Node add = new Node(value);
+     add.setNext(start);
+     start = add;
+   }
+   else{
+     Node add = new Node(value);
+     Node previous = start;
+     for(int i = 0; i < index - 1; i++){
+       previous = previous.getNext();
+     }
+     add.setPrev(previous);
+     add.setNext(previous.getNext());
+     previous.setNext(add);
+     previous.getNext().setPrev(add);
+   }
+   size++;
  }
  
  public String toString(){
