@@ -60,11 +60,11 @@ public class MyLinkedList{
    Node current = start;
    String out = "";
    out += "[";
-   while(size != 0 && current.getNext() != null){
-     out += current.getData() + ", ";
+   while(current != null){
+     out += current.getData();
+     if(current.getNext() != null) out += ", ";
      current = current.getNext();
    }
-   if(end != null) out += end.getData();
    out += "]";
    return out;
  }
