@@ -15,11 +15,13 @@ public class MyLinkedList{
     if(start == null) start = new Node(value);
     else if (end == null){
       end = new Node(value);
+      end.setPrev(start);
       start.setNext(end);
     }
     else{
       Node add = new Node(value);
       end.setNext(add);
+      add.setPrev(end);
       end = add;
     }
     size++;
@@ -27,11 +29,15 @@ public class MyLinkedList{
   }
 
   public void add(int index, String value){
-    if(index > size) throw new IndexOutOfBoundsException();
-    if(index == size) this.add(value);
+    if(index > size || index < 0) throw new IndexOutOfBoundsException();
+    if(index == size){
+      this.add(value);
+      size--;
+    }
     else if(index == 0){
       Node add = new Node(value);
       add.setNext(start);
+      start.setPrev(add);
       start = add;
     }
     else{
@@ -40,15 +46,16 @@ public class MyLinkedList{
       for(int i = 0; i < index - 1; i++){
         previous = previous.getNext();
       }
+      Node next = previous.getNext();
       add.setPrev(previous);
-      add.setNext(previous.getNext());
+      add.setNext(next);
       previous.setNext(add);
-      previous.getNext().setPrev(add);
+      next.setPrev(add);
     }
     size++;
   }
   public String get(int index){
-    if(index >= size) throw new IndexOutOfBoundsException();
+    if(index >= size || index < 0) throw new IndexOutOfBoundsException();
     Node value = start;
     for(int i = 0; i < index; i++){
       value = value.getNext();
@@ -57,7 +64,7 @@ public class MyLinkedList{
   }
 
   public String set(int index, String value){
-    if(index >= size) throw new IndexOutOfBoundsException();
+    if(index >= size || index < 0) throw new IndexOutOfBoundsException();
     Node search = start;
     for(int i = 0; i < index; i++){
       search = search.getNext();
@@ -75,6 +82,19 @@ public class MyLinkedList{
       out += current.getValue();
       if(current.getNext() != null) out += ", ";
       current = current.getNext();
+    }
+    out += "]";
+    return out;
+  }
+
+  public String toStringReversed(){
+    Node current = end;
+    String out = "";
+    out += "[";
+    while(current != null){
+      out += current.getValue();
+      if(current.getPrev() != null) out += ", ";
+      current = current.getPrev();
     }
     out += "]";
     return out;
