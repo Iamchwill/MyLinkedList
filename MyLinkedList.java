@@ -99,4 +99,18 @@ public class MyLinkedList{
     out += "]";
     return out;
   }
+
+  public String remove(int index){
+    if(index >= size || index < 0) throw new IndexOutOfBoundsException();
+    Node value = start;
+    for(int i = 0; i < index; i++){
+      value = value.getNext();
+    }
+    Node previous = value.getPrev();
+    Node next = value.getNext();
+    previous.setNext(next);
+    next.setPrev(previous);
+    size--;
+    return value.getValue();
+  }
 }
