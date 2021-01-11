@@ -14,6 +14,7 @@ public class MyLinkedList{
   public boolean add(String value){
     if(start == null) {
       start = new Node(value);
+      end = start;
     }
     else if (end == null){
       end = new Node(value);
