@@ -13,13 +13,9 @@ public class MyLinkedList{
 
   public boolean add(String value){
     if(start == null) {
-      start = new Node(value);
-      end = start;
-    }
-    else if (end == null){
-      end = new Node(value);
-      end.setPrev(start);
-      start.setNext(end);
+      Node set = new Node(value);
+      start = set;
+      end = set;
     }
     else{
       Node add = new Node(value);
@@ -108,6 +104,16 @@ public class MyLinkedList{
   public String remove(int index){
     if(index >= size || index < 0) throw new IndexOutOfBoundsException();
     Node value = start;
+    if(index == 0){
+      start = value.getNext();
+      if(start != null) start.setPrev(null);
+    }
+    else if(index == size - 1){
+      value = end;
+      end = value.getPrev();
+      end.setNext(null);
+    }
+    else{
     for(int i = 0; i < index; i++){
       value = value.getNext();
     }
@@ -115,6 +121,7 @@ public class MyLinkedList{
     Node next = value.getNext();
     previous.setNext(next);
     next.setPrev(previous);
+  }
     size--;
     return value.getValue();
   }
@@ -124,6 +131,7 @@ public class MyLinkedList{
     end.setNext(link);
     link.setPrev(end);
     size += other.size();
+    end = other.end;
     other.clear();
   }
 
@@ -131,5 +139,13 @@ public class MyLinkedList{
     start = null;
     end = null;
     size = 0;
+  }
+
+  public void printEnd(){
+    System.out.println(end.getValue());
+  }
+
+  public void printStart(){
+    System.out.println(start.getValue());
   }
 }
