@@ -12,7 +12,9 @@ public class MyLinkedList{
   }
 
   public boolean add(String value){
-    if(start == null) start = new Node(value);
+    if(start == null) {
+      start = new Node(value);
+    }
     else if (end == null){
       end = new Node(value);
       end.setPrev(start);
@@ -35,9 +37,11 @@ public class MyLinkedList{
       size--;
     }
     else if(index == 0){
+      if(end == null){}
       Node add = new Node(value);
       add.setNext(start);
       start.setPrev(add);
+      if(end == null) end = start;
       start = add;
     }
     else{
@@ -112,5 +116,19 @@ public class MyLinkedList{
     next.setPrev(previous);
     size--;
     return value.getValue();
+  }
+
+  public void extend(MyLinkedList other){
+    Node link = other.start;
+    end.setNext(link);
+    link.setPrev(end);
+    size += other.size();
+    other.clear();
+  }
+
+  private void clear(){
+    start = null;
+    end = null;
+    size = 0;
   }
 }
