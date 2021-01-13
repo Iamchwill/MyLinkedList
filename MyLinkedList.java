@@ -127,11 +127,18 @@ public class MyLinkedList{
   }
 
   public void extend(MyLinkedList other){
-    Node link = other.start;
-    end.setNext(link);
-    link.setPrev(end);
+    if(start == null){
+      start = other.start;
+      end = other.end;
+    }
+    else if(other.start == null);
+    else{
+      Node link = other.start;
+      end.setNext(link);
+      link.setPrev(end);
+      end = other.end;
+    }
     size += other.size();
-    end = other.end;
     other.clear();
   }
 
