@@ -104,7 +104,11 @@ public class MyLinkedList{
   public String remove(int index){
     if(index >= size || index < 0) throw new IndexOutOfBoundsException();
     Node value = start;
-    if(index == 0){
+    if(size == 1){
+      start = null;
+      end = null;
+    }
+    else if(index == 0){
       start = value.getNext();
       if(start != null) start.setPrev(null);
     }
